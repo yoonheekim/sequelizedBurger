@@ -1,0 +1,86 @@
+<div class="container">
+    <header>
+        <h1 class="text-center"><i class="fas fa-hamburger"></i> Eat Da Burger !</h1>
+    </header>
+
+    {{!-- FORM --}}
+    <form class="text-center mx-auto col-6">
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputBurger">
+        </div>
+        <button id="submit" type="submit" class="btn btn-warning">Submit</button>
+        <p style="color:gray">Enter a burger you want to eat Click the "Submit" button</p>
+    </form>
+
+    
+
+    {{!-- not devoured --}}
+    <div class="row">
+        <div id="devourFalse" class="col-6">
+            <ul class="list-group">
+            {{#each bugers}}
+                {{#unless devoured}}
+                <li class="list-group-item">{{id}}. {{burger_name}}        
+                    <button data-id="{{id}}" type="button" class="btn btn-outline-secondary btn-sm devour">Devour it!</button>
+                </li>
+                
+                {{/unless}}
+            {{/each}}
+            </ul>
+        </div>
+            
+
+        {{!-- devoured --}}
+        <div id="devourTrue" class="col-6">
+            <ul class="list-group">
+            {{#each bugers}}
+                {{#if devoured}}
+                <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}}</li>
+                {{/if}}
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    //click submit
+    $("#submit").on("click", function(event){
+        event.preventDefault();
+
+        var newBurger = {
+            burger_name : $("#inputBurger").val().trim()
+        };
+        
+        $.ajax("/api/burgers", {
+            method : "POST",
+            data : newBurger
+        }).then(function(){
+            console.log("added burger : ", $("#inputBurger").val().trim());
+            location.reload();
+        });
+        //clear form
+        $("#inputBurger").val("");
+
+    });
+
+    //click devour
+    $(".devour").on("click", function(event){
+        event.preventDefault();
+        console.log("clicked");
+        
+        var id = $(this).data("id");
+        var newDevoured = {
+            devoured : true
+        }
+        $.ajax("/api/burgers/"+id, {
+            method : "PUT",
+            data  : newDevoured
+        }).then(function(){
+            console.log("Devour burger id", id);
+            location.reload();
+        });
+    })
+
+</script>

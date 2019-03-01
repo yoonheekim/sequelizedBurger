@@ -1,0 +1,19 @@
+#devourFalse button {
+    margin-left: 10px;
+}
+body{
+    
+    background: url("../img/burger.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+    width: 100%;
+    
+}
+header{
+    margin: 50px;
+}
+form { 
+    margin-bottom: 70px;
+}
