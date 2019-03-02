@@ -1,24 +1,14 @@
-// Inside burger.js, import orm.js into burger.js
-var orm = require("../config/orm.js");
+module.exports = function(sequalize, DataTypes){
+    var Burger = sequalize.define('burger', {
+        burger_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        devoured: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
 
-// Also inside burger.js, create the code that will call the ORM functions using burger specific input for the ORM.
-var burger = {
-    selectAll: function(cb){
-        orm.selectAll("burgers", function(res){
-            cb(res);
-        });
-    },
-    insertOne: function(tableCol, values, cb){
-        orm.insertOne("burgers", tableCol, values, function(res){
-            cb(res);
-        })
-    },
-    updateOne: function(objColVals, condition, cb){
-        orm.updateOne("burgers", objColVals, condition, function(res){
-            cb(res);
-        });
-    }
-
+    });
+    return Burger;
 }
-// Export at the end of the burger.js file.
-module.exports = burger;
