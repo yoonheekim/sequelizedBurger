@@ -93,6 +93,19 @@
             console.log("Devour burger id", id);
             location.reload();
         });
+
+        $.ajax("/api/customers", {
+            method : "POST",
+            data : {
+                customerName : $("#inputCustomer").val().trim()
+            }
+        })
+        .then(function(){
+            console.log("Devour customer", $("#inputCustomer").val().trim());
+            location.reload();
+        });
+
+        $("#inputCustomer").val("");
     })
 
 </script>
