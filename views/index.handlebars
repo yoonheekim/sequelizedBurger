@@ -18,10 +18,22 @@
     <div class="row">
         <div id="devourFalse" class="col-6">
             <ul class="list-group">
-            {{#each bugers}}
+            {{#each burger}}
                 {{#unless devoured}}
-                <li class="list-group-item">{{id}}. {{burger_name}}        
-                    <button data-id="{{id}}" type="button" class="btn btn-outline-secondary btn-sm devour">Devour it!</button>
+                <li class="list-group-item">
+                    <form class="mb-0" style="height: 30px;">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>{{id}}. {{burger_name}}</p>
+                            </div>
+                            <div class="col pr-0">
+                                <input type="text" class="form-control form-control-sm" id="inputCustomer" placeholder="Customer?"> 
+                            </div>
+                            <div class="col pl-0">
+                                <button data-id={{id}} type="button" class="btn btn-outline-secondary btn-sm devour">Devour it!</button>
+                            </div>
+                        </div>
+                    </form>
                 </li>
                 
                 {{/unless}}
@@ -33,7 +45,7 @@
         {{!-- devoured --}}
         <div id="devourTrue" class="col-6">
             <ul class="list-group">
-            {{#each bugers}}
+            {{#each burger}}
                 {{#if devoured}}
                 <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}}</li>
                 {{/if}}
