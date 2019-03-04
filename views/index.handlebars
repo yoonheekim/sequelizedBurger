@@ -47,7 +47,7 @@
             <ul class="list-group">
             {{#each burger}}
                 {{#if devoured}}
-                <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}} ( eaten by {{Customer.customerName}})</li>
+                <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}} <span class="badge badge-warning">eaten by {{Customer.customerName}}</span></li>
                 {{/if}}
             {{/each}}
             </ul>
@@ -108,15 +108,6 @@
             });
         });
         
-        
-        
-        //$.ajax("/api/burgers/"+id, {
-        //    method : "PUT",
-        //    data  : newDevoured
-        //}).then(function(){
-        //    console.log("Devour burger id", id);
-        //    location.reload();
-        //});
     })
 
 </script>
