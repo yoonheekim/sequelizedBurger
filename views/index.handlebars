@@ -47,7 +47,7 @@
             <ul class="list-group">
             {{#each burger}}
                 {{#if devoured}}
-                <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}}</li>
+                <li class="list-group-item list-group-item-secondary">{{id}}. {{burger_name}} ( eaten by {{Customer.customerName}})</li>
                 {{/if}}
             {{/each}}
             </ul>
@@ -81,18 +81,8 @@
     $(".devour").on("click", function(event){
         event.preventDefault();
         console.log("clicked");
-        
+        var customerId = "";
         var id = $(this).data("id");
-        var newDevoured = {
-            devoured : true
-        }
-        $.ajax("/api/burgers/"+id, {
-            method : "PUT",
-            data  : newDevoured
-        }).then(function(){
-            console.log("Devour burger id", id);
-            location.reload();
-        });
 
         $.ajax("/api/customers", {
             method : "POST",
@@ -100,12 +90,33 @@
                 customerName : $("#inputCustomer").val().trim()
             }
         })
-        .then(function(){
-            console.log("Devour customer", $("#inputCustomer").val().trim());
-            location.reload();
-        });
+        .then(function(data){
+            console.log("burger was devoured by ", $("#inputCustomer").val().trim());
+            // data = dbCustomer.dataValues.id
+            console.log(data);
 
-        $("#inputCustomer").val("");
+
+            $.ajax("/api/burgers/"+id, {
+                method : "PUT",
+                data  : {
+                    devoured : true,
+                    CustomerId : data
+                }
+            }).then(function(){
+                console.log("Devour burger id", id);
+                location.reload();
+            });
+        });
+        
+        
+        
+        //$.ajax("/api/burgers/"+id, {
+        //    method : "PUT",
+        //    data  : newDevoured
+        //}).then(function(){
+        //    console.log("Devour burger id", id);
+        //    location.reload();
+        //});
     })
 
 </script>
