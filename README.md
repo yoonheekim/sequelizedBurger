@@ -18,13 +18,19 @@
 ## Technologies
 > Node.js, Github, Heroku, npm packages(sequelize, express, express-handlebars, mysql2), html, javascript, Jquery, Bootstrap
 
-## Associations
+## Sequelize (Associations, validation, include)
 1. Added in a Customer Association to the project and connecting it with Burger model
 ```
 burger belongsTo Customer
 Customer hasMany Burger
 ```
 2. Burger include: [Customer]
+3. Validation 
+```
+A burger's name cannot be null
+A burger's devoured status is false by default
+A Customer's name cannot be null
+```
 
 ## Screenshot
 ![alt text](https://raw.githubusercontent.com/yoonheekim/sequelizedBurger/master/public/images/sequelizedburger.jpg)
