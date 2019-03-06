@@ -27,7 +27,7 @@ Customer hasMany Burger
 2. Burger include: [Customer]
 
 ## Screenshot
-![alt text](https://yoonheekim.github.io/YoonPortfolio/img/sequelizedburger.jpg)
+![alt text](https://raw.githubusercontent.com/yoonheekim/sequelizedBurger/master/public/images/sequelizedburger.jpg)
 
 ## Problems
 * 
